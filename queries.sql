@@ -39,7 +39,7 @@ CREATE TABLE commodity_table(
 	total_yards INT NOT NULL,
 	needed_recycle INT NOT NULL,
 	needed_compost INT NOT NULL,
-	enough_recycle_compost VARCHAR NOT NULL,
+	enough_recycle_compost INT NOT NULL,
 	PRIMARY KEY (cust)
 );
 
