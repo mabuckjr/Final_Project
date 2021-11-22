@@ -38,9 +38,8 @@ CREATE TABLE commodity_table(
 	recycle INT NOT NULL,
 	total_yards INT NOT NULL,
 	needed_recycle INT NOT NULL,
-	enough_recycle VARCHAR NOT NULL,
 	needed_compost INT NOT NULL,
-	enough_compost VARCHAR NOT NULL,
+	enough_recycle_compost VARCHAR NOT NULL,
 	PRIMARY KEY (cust)
 );
 
@@ -80,9 +79,8 @@ SELECT vc.cust,
 	ct.recycle,
 	ct.total_yards,
 	ct.needed_recycle,
-	ct.enough_recycle,
 	ct.needed_compost,
-	ct.enough_compost
+	ct.enough_recycle_compost
 INTO full_table
 FROM var_cust as vc
 RIGHT JOIN var_serv as vs
@@ -93,4 +91,3 @@ ON (vc.cust = ct.cust);
 SELECT * FROM full_table;
 
 Drop TABLE full_table;
-
