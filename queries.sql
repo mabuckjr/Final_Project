@@ -1,7 +1,6 @@
 -- Create services table
 CREATE TABLE var_serv(
 	cust INT NOT NULL,
-	cycle VARCHAR NOT NULL,
 	qty INT NOT NULL,
 	size INT NOT NULL,
 	weekly_yards INT NOT NULL,
@@ -38,8 +37,6 @@ CREATE TABLE commodity_table(
 	garbage INT NOT NULL,
 	recycle INT NOT NULL,
 	total_yards INT NOT NULL,
-	do_they_recycle VARCHAR NOT NULL,
-	do_they_compost VARCHAR NOT NULL,
 	needed_recycle INT NOT NULL,
 	needed_compost INT NOT NULL,
 	PRIMARY KEY (cust)
@@ -58,8 +55,6 @@ CREATE TABLE train_data(
 	garbage INT NOT NULL,
 	recycle INT NOT NULL,
 	total_yards INT NOT NULL,
-	do_they_recycle VARCHAR NOT NULL,
-	do_they_compost VARCHAR NOT NULL,
 	needed_recycle INT NOT NULL,
 	needed_compost INT NOT NULL,
 	PRIMARY KEY (cust)
@@ -77,8 +72,6 @@ CREATE TABLE test_data(
 	garbage INT NOT NULL,
 	recycle INT NOT NULL,
 	total_yards INT NOT NULL,
-	do_they_recycle VARCHAR NOT NULL,
-	do_they_compost VARCHAR NOT NULL,
 	needed_recycle INT NOT NULL,
 	needed_compost INT NOT NULL,
 	PRIMARY KEY (cust)
@@ -91,7 +84,6 @@ DROP TABLE test_data;
 -- Joining the two tables var tables (just in case I need it later)
 SELECT vc.cust,
 	vc.monthly_bill,
-	vs.cycle,
 	vs.qty,
 	vs.size,
 	vs.weekly_yards,
@@ -119,20 +111,18 @@ SELECT vc.cust,
 	ct.garbage,
 	ct.recycle,
 	ct.total_yards,
-	ct.do_they_recycle,
-	ct.do_they_compost,
 	ct.needed_recycle,
 	ct.needed_compost
-INTO ml_table
+INTO full_table
 FROM var_cust as vc
 RIGHT JOIN var_serv as vs
 ON (vc.cust=vs.cust)
 INNER JOIN commodity_table as ct
 ON (vc.cust = ct.cust);
 
-SELECT * FROM ml_table;
+SELECT * FROM full_table;
 
-Drop TABLE ml_table;
+Drop TABLE full_table;
 
 
 --Join Var Cust, Var Serv, and train data (will have to remove duplicate rows in pandas)
@@ -144,8 +134,6 @@ SELECT vc.cust,
 	tr.garbage,
 	tr.recycle,
 	tr.total_yards,
-	tr.do_they_recycle,
-	tr.do_they_compost,
 	tr.needed_recycle,
 	tr.needed_compost
 INTO tr_table
@@ -168,8 +156,6 @@ SELECT vc.cust,
 	te.garbage,
 	te.recycle,
 	te.total_yards,
-	te.do_they_recycle,
-	te.do_they_compost,
 	te.needed_recycle,
 	te.needed_compost
 INTO te_table
