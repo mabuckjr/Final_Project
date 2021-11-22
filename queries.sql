@@ -29,17 +29,20 @@ SELECT * FROM var_cust;
 
 DROP TABLE var_cust;
 
--- Create table for the pivot I made in Pandas
+-- Create table for the serv_pivot I made in Pandas
 CREATE TABLE commodity_table(
 	cust INT NOT NULL,
 	biz_type VARCHAR NOT NULL,
+	total_yards INT NOT NULL,
 	compost INT NOT NULL,
 	garbage INT NOT NULL,
 	recycle INT NOT NULL,
-	total_yards INT NOT NULL,
 	needed_recycle INT NOT NULL,
 	needed_compost INT NOT NULL,
 	enough_recycle_compost INT NOT NULL,
+	compost_cost INT NOT NULL,
+	garbage_cost INT NOT NULL,
+	recycle_cost INT NOT NULL,
 	PRIMARY KEY (cust)
 );
 
@@ -74,13 +77,16 @@ SELECT vc.cust,
 	vc.monthly_bill,
 	vs.tax_body,
 	ct.biz_type,
+	ct.total_yards,
 	ct.compost,
 	ct.garbage,
 	ct.recycle,
-	ct.total_yards,
 	ct.needed_recycle,
 	ct.needed_compost,
-	ct.enough_recycle_compost
+	ct.enough_recycle_compost,
+	ct.compost_cost,
+	ct.garbage_cost,
+	ct.recycle_cost
 INTO full_table
 FROM var_cust as vc
 RIGHT JOIN var_serv as vs
