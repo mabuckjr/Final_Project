@@ -3,9 +3,9 @@ CREATE TABLE var_serv(
 	cust INT NOT NULL,
 	qty INT NOT NULL,
 	size INT NOT NULL,
+	pickups INT NOT NULL,
 	weekly_yards INT NOT NULL,
 	commodity VARCHAR NOT NULL,
-	pickups INT NOT NULL,
 	bin_amount INT NOT NULL,
 	tax_body VARCHAR NOT NULL,
 	biz_type VARCHAR NOT NULL,
@@ -69,7 +69,7 @@ ON (vc.cust = vs.cust);
 
 SELECT * FROM cust_serv;
 
-Drop TABLE cust_serv;
+DROP TABLE cust_serv;
 
 
 --Join Var Cust, Var Serv, and commodity tables (will have to remove duplicate rows in pandas)
@@ -96,4 +96,4 @@ ON (vc.cust = ct.cust);
 
 SELECT * FROM full_table;
 
-Drop TABLE full_table;
+DROP TABLE full_table;
